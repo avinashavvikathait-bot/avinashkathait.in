@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Avinash Kathait — IT Infrastructure & Cloud Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --bg2: #0f1525;
+    --surface: #151d35;
+    --surface2: #1c2640;
+    --accent: #4f8ef7;
+    --accent2: #7b5ea7;
+    --accent3: #38d9a9;
+    --text: #e8edf8;
+    --text2: #8896b3;
+    --border: rgba(79,142,247,0.15);
+    --glow: rgba(79,142,247,0.08);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  /* ── Background Grid ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(79,142,247,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(79,142,247,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── Nav ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 3rem;
+    background: rgba(10,14,26,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--text2);
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-family: 'DM Mono', monospace;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ── Hero ── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 0 3rem;
+    z-index: 1;
+    overflow: hidden;
+  }
+
+  .hero-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+  }
+  .hero-orb-1 {
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(79,142,247,0.18) 0%, transparent 70%);
+    top: -100px; right: -100px;
+    animation: float 8s ease-in-out infinite;
+  }
+  .hero-orb-2 {
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(123,94,167,0.15) 0%, transparent 70%);
+    bottom: 50px; left: 200px;
+    animation: float 10s ease-in-out infinite reverse;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-30px); }
+  }
+
+  .hero-inner {
+    max-width: 900px;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--accent3);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .hero-tag::before {
+    content: '';
+    display: inline-block;
+    width: 30px;
+    height: 1px;
+    background: var(--accent3);
+  }
+
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(3rem, 7vw, 6rem);
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+  }
+
+  .hero h1 .highlight {
+    background: linear-gradient(135deg, var(--accent) 0%, #a78bfa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    font-size: 1.15rem;
+    color: var(--text2);
+    max-width: 600px;
+    margin-bottom: 2.5rem;
+    line-height: 1.7;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    animation: fadeUp 0.8s 0.4s ease both;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 1.8rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.25s;
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+  }
+  .btn-primary:hover {
+    background: #3a7de0;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(79,142,247,0.3);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .btn-ghost:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text2);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    font-family: 'DM Mono', monospace;
+    animation: fadeUp 1s 1s ease both;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 50px;
+    background: linear-gradient(to bottom, var(--accent2), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.4; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.2); }
+  }
+
+  /* ── Sections ── */
+  section { position: relative; z-index: 1; }
+
+  .section-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 6rem 3rem;
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+    max-width: 80px;
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    margin-bottom: 3rem;
+    letter-spacing: -0.02em;
+  }
+
+  /* ── About ── */
+  #about { background: var(--bg2); }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .about-text p {
+    color: var(--text2);
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 1.2rem;
+  }
+
+  .about-text p strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .info-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  .info-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding-bottom: 1.2rem;
+    border-bottom: 1px solid rgba(79,142,247,0.07);
+  }
+
+  .info-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .info-icon {
+    font-size: 1.1rem;
+    margin-top: 2px;
+    flex-shrink: 0;
+    width: 28px;
+    text-align: center;
+  }
+
+  .info-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.2rem;
+  }
+
+  .info-value {
+    font-size: 0.9rem;
+    color: var(--text);
+  }
+
+  .info-value a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .strength-list {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .strength-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 0.9rem;
+    color: var(--text2);
+  }
+
+  .strength-item::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent3);
+    flex-shrink: 0;
+  }
+
+  /* ── Experience ── */
+  #experience { background: var(--bg); }
+
+  .timeline {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 24px;
+    top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+  }
+
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    gap: 1.5rem;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .timeline-dot {
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 6px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .timeline-dot-inner {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 3px rgba(79,142,247,0.2), 0 0 12px rgba(79,142,247,0.4);
+    flex-shrink: 0;
+  }
+
+  .exp-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+
+  .exp-card:hover {
+    border-color: rgba(79,142,247,0.3);
+    box-shadow: 0 4px 30px var(--glow);
+  }
+
+  .exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .exp-company {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--text);
+  }
+
+  .exp-period {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--accent3);
+    background: rgba(56,217,169,0.08);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    border: 1px solid rgba(56,217,169,0.2);
+    white-space: nowrap;
+  }
+
+  .exp-role {
+    font-size: 0.85rem;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 1rem;
+    font-style: italic;
+  }
+
+  .exp-location {
+    font-size: 0.8rem;
+    color: var(--text2);
+    margin-bottom: 1rem;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .exp-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .exp-bullets li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    font-size: 0.88rem;
+    color: var(--text2);
+    line-height: 1.6;
+  }
+
+  .exp-bullets li::before {
+    content: '›';
+    color: var(--accent);
+    font-size: 1.1rem;
+    line-height: 1.4;
+    flex-shrink: 0;
+  }
+
+  /* ── Skills ── */
+  #skills { background: var(--bg2); }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .skill-cat {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.8rem;
+    transition: border-color 0.3s;
+  }
+
+  .skill-cat:hover { border-color: rgba(79,142,247,0.3); }
+
+  .skill-cat-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--text);
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .skill-cat-title span {
+    font-size: 1.1rem;
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .skill-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    padding: 0.35rem 0.8rem;
+    border-radius: 4px;
+    background: rgba(79,142,247,0.08);
+    border: 1px solid rgba(79,142,247,0.15);
+    color: var(--text2);
+    transition: all 0.2s;
+  }
+
+  .skill-tag:hover {
+    background: rgba(79,142,247,0.15);
+    color: var(--accent);
+    border-color: rgba(79,142,247,0.3);
+  }
+
+  /* ── Certifications ── */
+  #certs { background: var(--bg); }
+
+  .certs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .cert-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.8rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1.2rem;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cert-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .cert-card:hover::before { opacity: 1; }
+  .cert-card:hover {
+    box-shadow: 0 8px 30px var(--glow);
+    transform: translateY(-3px);
+  }
+
+  .cert-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+  }
+
+  .cert-body {}
+
+  .cert-name {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .cert-org {
+    font-size: 0.8rem;
+    color: var(--accent);
+    margin-bottom: 0.3rem;
+  }
+
+  .cert-year {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--text2);
+  }
+
+  /* ── Education ── */
+  #education { background: var(--bg2); }
+
+  .edu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .edu-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.8rem;
+    transition: border-color 0.3s;
+  }
+
+  .edu-card:hover { border-color: rgba(79,142,247,0.3); }
+
+  .edu-degree {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .edu-school {
+    font-size: 0.85rem;
+    color: var(--accent);
+    margin-bottom: 0.3rem;
+  }
+
+  .edu-year {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--text2);
+  }
+
+  /* ── Contact ── */
+  #contact { background: var(--bg); }
+
+  .contact-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 3rem;
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact-box::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center top, rgba(79,142,247,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .contact-headline {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .contact-sub {
+    color: var(--text2);
+    font-size: 0.95rem;
+    margin-bottom: 2.5rem;
+    line-height: 1.7;
+  }
+
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--surface2);
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.25s;
+  }
+
+  .contact-link:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px var(--glow);
+  }
+
+  /* ── Footer ── */
+  footer {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid var(--border);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--text2);
+  }
+
+  footer span { color: var(--accent); }
+
+  /* ── Status badge ── */
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--accent3);
+    background: rgba(56,217,169,0.08);
+    border: 1px solid rgba(56,217,169,0.2);
+    border-radius: 20px;
+    padding: 0.4rem 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent3);
+    animation: blink 2s ease-in-out infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { padding: 0 1.5rem; }
+    .section-inner { padding: 4rem 1.5rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .timeline::before { left: 20px; }
+    .timeline-item { grid-template-columns: 44px 1fr; }
+    .contact-box { padding: 2rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">AK</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#certs">Certifications</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+  <div class="hero-inner">
+    <div class="status-badge">
+      <div class="status-dot"></div>
+      Open to Cloud & DevOps Opportunities
+    </div>
+    <div class="hero-tag">IT Infrastructure · M365 · Azure · PowerShell</div>
+    <h1>
+      <span class="highlight">Avinash</span><br>Kathait
+    </h1>
+    <p class="hero-sub">
+      IT Infrastructure Engineer with 5+ years of experience in Office 365 administration, 
+      PowerShell automation, and cloud environments. Currently transitioning into Cloud & DevOps engineering.
+    </p>
+    <div class="hero-ctas">
+      <a href="#experience" class="btn btn-primary">View My Work ↓</a>
+      <a href="mailto:avinash.kathait56@outlook.com" class="btn btn-ghost">✉ Get in Touch</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    scroll
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="section-label">01 — About</div>
+    <h2 class="section-title">A little about me</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          I'm a <strong>resourceful IT Infrastructure Engineer</strong> based in Greater Noida, India, 
+          with over 5 years of hands-on experience supporting global organizations across India, the UK, and the US.
+        </p>
+        <p>
+          My core strength lies in <strong>Microsoft 365 administration</strong> — managing Exchange, Entra ID, 
+          Defender, SharePoint, Teams, and OneDrive — paired with <strong>PowerShell scripting</strong> that 
+          automates repetitive workflows and scales to enterprise needs.
+        </p>
+        <p>
+          I'm now channeling this foundation into <strong>Cloud and DevOps engineering</strong>, 
+          with a focus on Azure infrastructure, CI/CD pipelines, and automation at scale.
+        </p>
+        <div class="strength-list">
+          <div class="strength-item">Quick learner and active listener</div>
+          <div class="strength-item">Strong communicator and team collaborator</div>
+          <div class="strength-item">Detail-oriented with a passion for automation</div>
+          <div class="strength-item">Passionate about automobiles (and building efficient systems)</div>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-row">
+          <div class="info-icon">📍</div>
+          <div>
+            <div class="info-label">Location</div>
+            <div class="info-value">Greater Noida, UP 201310</div>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">📞</div>
+          <div>
+            <div class="info-label">Phone</div>
+            <div class="info-value">+91 70608 38476</div>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">✉️</div>
+          <div>
+            <div class="info-label">Email</div>
+            <div class="info-value"><a href="mailto:avinash.kathait56@outlook.com">avinash.kathait56@outlook.com</a></div>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">🗣️</div>
+          <div>
+            <div class="info-label">Languages</div>
+            <div class="info-value">Hindi, English</div>
+          </div>
+        </div>
+        <div class="info-row">
+          <div class="info-icon">🎓</div>
+          <div>
+            <div class="info-label">Education</div>
+            <div class="info-value">B.Com — H.N.B Garhwal University (2019)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-inner">
+    <div class="section-label">02 — Experience</div>
+    <h2 class="section-title">Where I've worked</h2>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-dot"><div class="timeline-dot-inner"></div></div>
+        <div class="exp-card">
+          <div class="exp-header">
+            <div class="exp-company">Coforge Limited</div>
+            <div class="exp-period">May 2022 — Present</div>
+          </div>
+          <div class="exp-role">Associate — Infrastructure IT OPS (M365 Engineer)</div>
+          <div class="exp-location">📍 India · Supporting India, UK & US teams</div>
+          <ul class="exp-bullets">
+            <li>Administered Office 365 via Admin Center, Exchange, Entra ID, Defender, and PowerShell at enterprise scale.</li>
+            <li>Automated workflows across Exchange, Azure, Defender, OneDrive, and SharePoint using PowerShell scripting.</li>
+            <li>Managed PSA ticketing via ServiceNow and RMM via ConnectWise Automate.</li>
+            <li>Handled MFA, P2/P3 escalations, email/call support, and daily operations reporting.</li>
+            <li>Delivered onboarding training and knowledge transfer to new team members globally.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"><div class="timeline-dot-inner" style="background:var(--accent2);box-shadow:0 0 0 3px rgba(123,94,167,0.2),0 0 12px rgba(123,94,167,0.4)"></div></div>
+        <div class="exp-card">
+          <div class="exp-header">
+            <div class="exp-company">Lineal Services Pvt. Ltd.</div>
+            <div class="exp-period">Sep 2021 — Apr 2022</div>
+          </div>
+          <div class="exp-role">System Engineer</div>
+          <div class="exp-location">📍 Ahmedabad · Supporting US, UK, Dubai, Frankfurt</div>
+          <ul class="exp-bullets">
+            <li>Provided L1/L2 support to global users across multiple regions and time zones.</li>
+            <li>Worked with Office 365, RMM (ConnectWise), and project ticketing (Wrike).</li>
+            <li>Managed cloud storage solutions including AWS, Synology, and Backblaze.</li>
+            <li>Administered Duo MFA, ESET Endpoint Security, and virtual platforms: Azure, GCP, VMware.</li>
+            <li>Created GPOs, managed user onboarding/offboarding, and maintained asset and vendor records.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"><div class="timeline-dot-inner" style="background:var(--accent3);box-shadow:0 0 0 3px rgba(56,217,169,0.2),0 0 12px rgba(56,217,169,0.4)"></div></div>
+        <div class="exp-card">
+          <div class="exp-header">
+            <div class="exp-company">Precision Infomatic (M) Pvt. Ltd.</div>
+            <div class="exp-period">Aug 2020 — Sep 2021</div>
+          </div>
+          <div class="exp-role">System Engineer</div>
+          <div class="exp-location">📍 Client-site deployment</div>
+          <ul class="exp-bullets">
+            <li>Resolved client hardware, software, server, and networking issues end-to-end.</li>
+            <li>Managed Active Directory user policies, compliance reports, and Hyper-V platforms.</li>
+            <li>Installed and configured McAfee Total Security; performed server patching and maintenance.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-inner">
+    <div class="section-label">03 — Skills</div>
+    <h2 class="section-title">Technical toolkit</h2>
+    <div class="skills-grid">
+
+      <div class="skill-cat">
+        <div class="skill-cat-title"><span>☁️</span> Microsoft 365 & Cloud</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Office 365 Admin</span>
+          <span class="skill-tag">Exchange Online</span>
+          <span class="skill-tag">Entra ID</span>
+          <span class="skill-tag">Microsoft Defender</span>
+          <span class="skill-tag">SharePoint</span>
+          <span class="skill-tag">OneDrive</span>
+          <span class="skill-tag">Microsoft Teams</span>
+          <span class="skill-tag">Power Platform</span>
+        </div>
+      </div>
+
+      <div class="skill-cat">
+        <div class="skill-cat-title"><span>⚡</span> Automation & Scripting</div>
+        <div class="skill-tags">
+          <span class="skill-tag">PowerShell</span>
+          <span class="skill-tag">ServiceNow</span>
+          <span class="skill-tag">ConnectWise Automate</span>
+          <span class="skill-tag">Wrike</span>
+          <span class="skill-tag">RMM Tools</span>
+        </div>
+      </div>
+
+      <div class="skill-cat">
+        <div class="skill-cat-title"><span>🖥️</span> Infrastructure & Virtualization</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Active Directory</span>
+          <span class="skill-tag">Azure</span>
+          <span class="skill-tag">GCP</span>
+          <span class="skill-tag">VMware</span>
+          <span class="skill-tag">Hyper-V</span>
+          <span class="skill-tag">Group Policy (GPO)</span>
+          <span class="skill-tag">AWS</span>
+        </div>
+      </div>
+
+      <div class="skill-cat">
+        <div class="skill-cat-title"><span>🌐</span> Networking & Security</div>
+        <div class="skill-tags">
+          <span class="skill-tag">DNS / DHCP</span>
+          <span class="skill-tag">OSI Model</span>
+          <span class="skill-tag">Remote Management</span>
+          <span class="skill-tag">MFA / Duo</span>
+          <span class="skill-tag">ESET</span>
+          <span class="skill-tag">McAfee</span>
+          <span class="skill-tag">BIOS / CMOS</span>
+        </div>
+      </div>
+
+      <div class="skill-cat">
+        <div class="skill-cat-title"><span>☁️</span> Storage Solutions</div>
+        <div class="skill-tags">
+          <span class="skill-tag">AWS S3</span>
+          <span class="skill-tag">Synology NAS</span>
+          <span class="skill-tag">Backblaze</span>
+          <span class="skill-tag">OneDrive</span>
+          <span class="skill-tag">SharePoint</span>
+        </div>
+      </div>
+
+      <div class="skill-cat">
+        <div class="skill-cat-title"><span>🛠️</span> Hardware & Support</div>
+        <div class="skill-tags">
+          <span class="skill-tag">PC Assembly</span>
+          <span class="skill-tag">Server Patching</span>
+          <span class="skill-tag">Printer/Scanner Setup</span>
+          <span class="skill-tag">L1 / L2 Support</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certs">
+  <div class="section-inner">
+    <div class="section-label">04 — Certifications</div>
+    <h2 class="section-title">Credentials & training</h2>
+    <div class="certs-grid">
+
+      <div class="cert-card">
+        <div class="cert-icon">🏆</div>
+        <div class="cert-body">
+          <div class="cert-name">MS-102: Microsoft 365 Administrator</div>
+          <div class="cert-org">Microsoft</div>
+          <div class="cert-year">2024</div>
+        </div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-icon">🖧</div>
+        <div class="cert-body">
+          <div class="cert-name">Computer Hardware & Networking</div>
+          <div class="cert-org">Avni IT Placement, Dehradun</div>
+          <div class="cert-year">2020</div>
+        </div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-icon">💻</div>
+        <div class="cert-body">
+          <div class="cert-name">Computer Fundamentals & Web Development</div>
+          <div class="cert-org">Hiltron Calc, Dehradun</div>
+          <div class="cert-year">2016</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-inner">
+    <div class="section-label">05 — Education</div>
+    <h2 class="section-title">Academic background</h2>
+    <div class="edu-grid">
+
+      <div class="edu-card">
+        <div class="edu-degree">Bachelor of Commerce</div>
+        <div class="edu-school">H.N.B Garhwal University</div>
+        <div class="edu-year">2019</div>
+      </div>
+
+      <div class="edu-card">
+        <div class="edu-degree">Intermediate (Commerce)</div>
+        <div class="edu-school">C.B.S.E Board</div>
+        <div class="edu-year">2014</div>
+      </div>
+
+      <div class="edu-card">
+        <div class="edu-degree">High School</div>
+        <div class="edu-school">C.B.S.E Board</div>
+        <div class="edu-year">2012</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="section-label">06 — Contact</div>
+    <div class="contact-box">
+      <div class="contact-headline">Let's connect</div>
+      <p class="contact-sub">
+        I'm actively exploring new opportunities in Cloud, Azure, and DevOps engineering. 
+        Whether you have a role, a project, or just want to talk tech — I'd love to hear from you.
+      </p>
+      <div class="contact-links">
+        <a href="mailto:avinash.kathait56@outlook.com" class="contact-link">
+          ✉️ avinash.kathait56@outlook.com
+        </a>
+        <a href="tel:+917060838476" class="contact-link">
+          📞 +91 70608 38476
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  Designed & built for <span>Avinash Kathait</span> · Greater Noida, India · 2025
+</footer>
+
+</body>
+</html>
