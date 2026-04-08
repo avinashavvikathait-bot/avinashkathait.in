@@ -3,6 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Security Headers -->
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+<meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+<meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://fonts.gstatic.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'">
 <title>Avinash Kathait — IT Infrastructure & Cloud Engineer</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -18,6 +24,15 @@
     --text2: #8896b3;
     --border: rgba(79,142,247,0.15);
     --glow: rgba(79,142,247,0.08);
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+    --transition-fast: 0.15s ease;
+    --transition-base: 0.25s ease;
+    --transition-slow: 0.4s ease;
+    --shadow-glow: 0 4px 30px var(--glow);
+    --shadow-glow-lg: 0 8px 40px rgba(79,142,247,0.15);
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -84,6 +99,53 @@
   }
 
   .nav-links a:hover { color: var(--accent); }
+
+  .nav-links a {
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.2s ease;
+  }
+  .nav-links a:hover::after,
+  .nav-links a.active::after {
+    transform: scaleX(1);
+  }
+  .nav-links a.active {
+    color: var(--accent);
+  }
+  .nav-social a {
+    display: flex;
+    align-items: center;
+    color: var(--text2);
+    transition: color 0.2s;
+  }
+  .nav-social a:hover {
+    color: var(--accent);
+  }
+  .nav-hamburger {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text);
+    cursor: pointer;
+    padding: 0.4rem;
+    border-radius: 4px;
+    transition: color 0.2s;
+  }
+  .nav-hamburger:hover { color: var(--accent); }
+  .nav-hamburger:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
 
   /* ── Hero ── */
   .hero {
@@ -217,6 +279,18 @@
     transform: translateY(-2px);
   }
 
+  .btn-icon {
+    padding: 0.85rem;
+    min-width: 44px;
+    justify-content: center;
+  }
+
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
   .hero-scroll {
     position: absolute;
     bottom: 2.5rem;
@@ -246,7 +320,7 @@
   }
 
   /* ── Sections ── */
-  section { position: relative; z-index: 1; }
+  section { position: relative; z-index: 1; scroll-margin-top: 80px; }
 
   .section-inner {
     max-width: 1100px;
@@ -328,11 +402,13 @@
   }
 
   .info-icon {
-    font-size: 1.1rem;
     margin-top: 2px;
     flex-shrink: 0;
     width: 28px;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
   }
 
   .info-label {
@@ -401,7 +477,6 @@
     display: grid;
     grid-template-columns: 50px 1fr;
     gap: 1.5rem;
-    animation: fadeUp 0.6s ease both;
   }
 
   .timeline-dot {
@@ -476,6 +551,9 @@
     color: var(--text2);
     margin-bottom: 1rem;
     font-family: 'DM Mono', monospace;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
   }
 
   .exp-bullets {
@@ -494,14 +572,6 @@
     line-height: 1.6;
   }
 
-  .exp-bullets li::before {
-    content: '›';
-    color: var(--accent);
-    font-size: 1.1rem;
-    line-height: 1.4;
-    flex-shrink: 0;
-  }
-
   /* ── Skills ── */
   #skills { background: var(--bg2); }
 
@@ -514,12 +584,17 @@
   .skill-cat {
     background: var(--surface);
     border: 1px solid var(--border);
+    border-left: 3px solid var(--cat-color, var(--border));
     border-radius: 12px;
     padding: 1.8rem;
-    transition: border-color 0.3s;
+    transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
   }
 
-  .skill-cat:hover { border-color: rgba(79,142,247,0.3); }
+  .skill-cat:hover {
+    border-color: var(--cat-color, rgba(79,142,247,0.3));
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-glow);
+  }
 
   .skill-cat-title {
     font-family: 'Syne', sans-serif;
@@ -557,6 +632,13 @@
     background: rgba(79,142,247,0.15);
     color: var(--accent);
     border-color: rgba(79,142,247,0.3);
+    letter-spacing: 0.05em;
+  }
+
+  .skill-tag--core {
+    background: rgba(79,142,247,0.14);
+    border-color: rgba(79,142,247,0.28);
+    color: var(--text);
   }
 
   /* ── Certifications ── */
@@ -597,9 +679,11 @@
     transform: translateY(-3px);
   }
 
-  .cert-icon {
-    font-size: 2rem;
+  .cert-icon-wrap {
     flex-shrink: 0;
+    display: flex;
+    align-items: flex-start;
+    padding-top: 2px;
   }
 
   .cert-body {}
@@ -637,10 +721,14 @@
     border: 1px solid var(--border);
     border-radius: 12px;
     padding: 1.8rem;
-    transition: border-color 0.3s;
+    transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
   }
 
-  .edu-card:hover { border-color: rgba(79,142,247,0.3); }
+  .edu-card:hover {
+    border-color: rgba(79,142,247,0.3);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-glow);
+  }
 
   .edu-degree {
     font-family: 'Syne', sans-serif;
@@ -768,10 +856,107 @@
     50% { opacity: 0.3; }
   }
 
+  /* ── Icons ── */
+  .icon {
+    width: 1em;
+    height: 1em;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex-shrink: 0;
+    vertical-align: middle;
+    display: inline-block;
+  }
+
+  .icon-sm { width: 0.9em; height: 0.9em; }
+  .icon-lg { width: 1.4em; height: 1.4em; }
+  .icon-xl { width: 2rem; height: 2rem; }
+
+  /* ── Animate on Scroll ── */
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  .animate-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .skills-grid .skill-cat:nth-child(2).is-visible { transition-delay: 0.1s; }
+  .skills-grid .skill-cat:nth-child(3).is-visible { transition-delay: 0.2s; }
+  .skills-grid .skill-cat:nth-child(4).is-visible { transition-delay: 0.1s; }
+  .skills-grid .skill-cat:nth-child(5).is-visible { transition-delay: 0.2s; }
+  .skills-grid .skill-cat:nth-child(6).is-visible { transition-delay: 0.3s; }
+  .certs-grid .cert-card:nth-child(2).is-visible { transition-delay: 0.1s; }
+  .certs-grid .cert-card:nth-child(3).is-visible { transition-delay: 0.2s; }
+  .edu-grid .edu-card:nth-child(2).is-visible { transition-delay: 0.1s; }
+  .edu-grid .edu-card:nth-child(3).is-visible { transition-delay: 0.2s; }
+  .timeline .timeline-item:nth-child(2).is-visible { transition-delay: 0.15s; }
+  .timeline .timeline-item:nth-child(3).is-visible { transition-delay: 0.3s; }
+
+  /* ── Resume Download Button ── */
+  .btn-download {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    padding: 0.5rem 1.1rem;
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    border-radius: 6px;
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: all 0.25s;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    flex-shrink: 0;
+  }
+
+  .btn-download:hover {
+    background: var(--accent);
+    color: #fff;
+    box-shadow: 0 4px 20px rgba(79,142,247,0.3);
+    transform: translateY(-1px);
+  }
+
   /* ── Responsive ── */
   @media (max-width: 768px) {
     nav { padding: 1rem 1.5rem; }
-    .nav-links { display: none; }
+    .btn-download { display: none; }
+    .nav-hamburger { display: flex; align-items: center; justify-content: center; }
+    .nav-links {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0; right: 0;
+      flex-direction: column;
+      gap: 0;
+      background: rgba(10,14,26,0.97);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+    }
+    .nav-links.is-open {
+      display: flex;
+      max-height: 400px;
+      padding: 1rem 0;
+    }
+    .nav-links li { width: 100%; }
+    .nav-links a {
+      display: block;
+      padding: 0.8rem 1.5rem;
+      font-size: 0.9rem;
+    }
+    .nav-links a::after { display: none; }
+    .nav-social { display: flex; justify-content: flex-start; padding: 0.4rem 1.5rem; }
     .hero { padding: 0 1.5rem; }
     .section-inner { padding: 4rem 1.5rem; }
     .about-grid { grid-template-columns: 1fr; gap: 2rem; }
@@ -783,16 +968,87 @@
 </head>
 <body>
 
+<!-- SVG SPRITE -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <symbol id="icon-location" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/>
+  </symbol>
+  <symbol id="icon-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1C9.61 21 3 14.39 3 6a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1.02l-2.2 2.2z"/>
+  </symbol>
+  <symbol id="icon-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+  </symbol>
+  <symbol id="icon-language" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+  </symbol>
+  <symbol id="icon-graduation" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M22 10v6M2 10l10-5 10 5-10 5-10-5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/>
+  </symbol>
+  <symbol id="icon-cloud" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/>
+  </symbol>
+  <symbol id="icon-terminal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/>
+  </symbol>
+  <symbol id="icon-server" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/>
+  </symbol>
+  <symbol id="icon-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+  </symbol>
+  <symbol id="icon-database" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+  </symbol>
+  <symbol id="icon-wrench" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/>
+  </symbol>
+  <symbol id="icon-award" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/>
+  </symbol>
+  <symbol id="icon-network" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="16" y="16" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="9" y="2" width="6" height="6" rx="1"/><path d="M5 16v-3a1 1 0 011-1h12a1 1 0 011 1v3"/><line x1="12" y1="12" x2="12" y2="8"/>
+  </symbol>
+  <symbol id="icon-monitor" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+  </symbol>
+  <symbol id="icon-linkedin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
+  </symbol>
+  <symbol id="icon-arrow-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/>
+  </symbol>
+  <symbol id="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+  </symbol>
+  <symbol id="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+  </symbol>
+  <symbol id="icon-chevron-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="9 18 15 12 9 6"/>
+  </symbol>
+  <symbol id="icon-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+  </symbol>
+</svg>
+
 <!-- NAV -->
 <nav>
   <div class="nav-logo">AK</div>
-  <ul class="nav-links">
+  <ul class="nav-links" id="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#certs">Certifications</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
+  <a href="Resume-AvinashKathait.pdf" download="Avinash_Kathait_Resume.pdf" class="btn-download" aria-label="Download Resume">
+    <svg class="icon icon-sm" aria-hidden="true"><use href="#icon-download"/></svg>
+    Resume
+  </a>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu" aria-expanded="false">
+    <svg class="icon icon-lg" id="hamburger-icon" aria-hidden="true"><use href="#icon-menu"/></svg>
+  </button>
 </nav>
 
 <!-- HERO -->
@@ -813,8 +1069,17 @@
       PowerShell automation, and cloud environments. Currently transitioning into Cloud & DevOps engineering.
     </p>
     <div class="hero-ctas">
-      <a href="#experience" class="btn btn-primary">View My Work ↓</a>
-      <a href="mailto:avinash.kathait56@outlook.com" class="btn btn-ghost">✉ Get in Touch</a>
+      <a href="#experience" class="btn btn-primary">
+        View My Work
+        <svg class="icon icon-sm" aria-hidden="true"><use href="#icon-arrow-down"/></svg>
+      </a>
+      <a href="/cdn-cgi/l/email-protection#345c5158585b7455425d5a55475c5f55405c555d401a5d5a" class="btn btn-ghost">
+        <svg class="icon icon-sm" aria-hidden="true"><use href="#icon-mail"/></svg>
+        Get in Touch
+      </a>
+      <a href="#" class="btn btn-ghost btn-icon" aria-label="LinkedIn">
+        <svg class="icon" aria-hidden="true"><use href="#icon-linkedin"/></svg>
+      </a>
     </div>
   </div>
   <div class="hero-scroll">
@@ -852,35 +1117,35 @@
       </div>
       <div class="info-card">
         <div class="info-row">
-          <div class="info-icon">📍</div>
+          <div class="info-icon"><svg class="icon icon-lg" style="color:var(--accent)" aria-hidden="true"><use href="#icon-location"/></svg></div>
           <div>
             <div class="info-label">Location</div>
             <div class="info-value">Greater Noida, UP 201310</div>
           </div>
         </div>
         <div class="info-row">
-          <div class="info-icon">📞</div>
+          <div class="info-icon"><svg class="icon icon-lg" style="color:var(--accent)" aria-hidden="true"><use href="#icon-phone"/></svg></div>
           <div>
             <div class="info-label">Phone</div>
             <div class="info-value">+91 70608 38476</div>
           </div>
         </div>
         <div class="info-row">
-          <div class="info-icon">✉️</div>
+          <div class="info-icon"><svg class="icon icon-lg" style="color:var(--accent)" aria-hidden="true"><use href="#icon-mail"/></svg></div>
           <div>
             <div class="info-label">Email</div>
-            <div class="info-value"><a href="mailto:avinash.kathait56@outlook.com">avinash.kathait56@outlook.com</a></div>
+            <div class="info-value"><a href="/cdn-cgi/l/email-protection#2b"><span class="__cf_email__" data-cfemail="553d3039393a1534233c3b34263d3e34213d343c217b3c3b">[email&#160;protected]</span></a></div>
           </div>
         </div>
         <div class="info-row">
-          <div class="info-icon">🗣️</div>
+          <div class="info-icon"><svg class="icon icon-lg" style="color:var(--accent)" aria-hidden="true"><use href="#icon-language"/></svg></div>
           <div>
             <div class="info-label">Languages</div>
             <div class="info-value">Hindi, English</div>
           </div>
         </div>
         <div class="info-row">
-          <div class="info-icon">🎓</div>
+          <div class="info-icon"><svg class="icon icon-lg" style="color:var(--accent)" aria-hidden="true"><use href="#icon-graduation"/></svg></div>
           <div>
             <div class="info-label">Education</div>
             <div class="info-value">B.Com — H.N.B Garhwal University (2019)</div>
@@ -898,7 +1163,7 @@
     <h2 class="section-title">Where I've worked</h2>
     <div class="timeline">
 
-      <div class="timeline-item">
+      <div class="timeline-item animate-on-scroll">
         <div class="timeline-dot"><div class="timeline-dot-inner"></div></div>
         <div class="exp-card">
           <div class="exp-header">
@@ -906,18 +1171,18 @@
             <div class="exp-period">May 2022 — Present</div>
           </div>
           <div class="exp-role">Associate — Infrastructure IT OPS (M365 Engineer)</div>
-          <div class="exp-location">📍 India · Supporting India, UK & US teams</div>
+          <div class="exp-location"><svg class="icon icon-sm" aria-hidden="true"><use href="#icon-location"/></svg> India · Supporting India, UK &amp; US teams</div>
           <ul class="exp-bullets">
-            <li>Administered Office 365 via Admin Center, Exchange, Entra ID, Defender, and PowerShell at enterprise scale.</li>
-            <li>Automated workflows across Exchange, Azure, Defender, OneDrive, and SharePoint using PowerShell scripting.</li>
-            <li>Managed PSA ticketing via ServiceNow and RMM via ConnectWise Automate.</li>
-            <li>Handled MFA, P2/P3 escalations, email/call support, and daily operations reporting.</li>
-            <li>Delivered onboarding training and knowledge transfer to new team members globally.</li>
+            <li><svg class="icon icon-sm" style="color:var(--accent);flex-shrink:0;margin-top:3px" aria-hidden="true"><use href="#icon-chevron-right"/></svg>Administered Office 365 via Admin Center, Exchange, Entra ID, Defender, and PowerShell at enterprise scale.</li>
+            <li><svg class="icon icon-sm" style="color:var(--accent);flex-shrink:0;margin-top:3px" aria-hidden="true"><use href="#icon-chevron-right"/></svg>Automated workflows across Exchange, Azure, Defender, OneDrive, and SharePoint using PowerShell scripting.</li>
+            <li><svg class="icon icon-sm" style="color:var(--accent);flex-shrink:0;margin-top:3px" aria-hidden="true"><use href="#icon-chevron-right"/></svg>Managed PSA ticketing via ServiceNow and RMM via ConnectWise Automate.</li>
+            <li><svg class="icon icon-sm" style="color:var(--accent);flex-shrink:0;margin-top:3px" aria-hidden="true"><use href="#icon-chevron-right"/></svg>Handled MFA, P2/P3 escalations, email/call support, and daily operations reporting.</li>
+            <li><svg class="icon icon-sm" style="color:var(--accent);flex-shrink:0;margin-top:3px" aria-hidden="true"><use href="#icon-chevron-right"/></svg>Delivered onboarding training and knowledge transfer to new team members globally.</li>
           </ul>
         </div>
       </div>
 
-      <div class="timeline-item">
+      <div class="timeline-item animate-on-scroll">
         <div class="timeline-dot"><div class="timeline-dot-inner" style="background:var(--accent2);box-shadow:0 0 0 3px rgba(123,94,167,0.2),0 0 12px rgba(123,94,167,0.4)"></div></div>
         <div class="exp-card">
           <div class="exp-header">
@@ -925,18 +1190,18 @@
             <div class="exp-period">Sep 2021 — Apr 2022</div>
           </div>
           <div class="exp-role">System Engineer</div>
-          <div class="exp-location">📍 Ahmedabad · Supporting US, UK, Dubai, Frankfurt</div>
+          <div class="exp-location"><svg class="icon icon-sm" aria-hidden="true"><use href="#icon-location"/></svg> Ahmedabad · Supporting US, UK, Dubai, Frankfurt</div>
           <ul class="exp-bullets">
-            <li>Provided L1/L2 support to global users across multiple regions and time zones.</li>
-            <li>Worked with Office 365, RMM (ConnectWise), and project ticketing (Wrike).</li>
-            <li>Managed cloud storage solutions including AWS, Synology, and Backblaze.</li>
-            <li>Administered Duo MFA, ESET Endpoint Security, and virtual platforms: Azure, GCP, VMware.</li>
-            <li>Created GPOs, managed user onboarding/offboarding, and maintained asset and vendor records.</li>
+            <li><svg class="icon icon-sm" style="color:var(--accent);flex-shrink:0;margin-top:3px" aria-hidden="true"><use href="#icon-chevron-right"/></svg>Provided L1/L2 support to global users across multiple regions and time zones.</li>
+            <li><svg class="icon icon-sm" style="color:var(--accent);flex-shrink:0;margin-top:3px" aria-hidden="true"><use href="#icon-chevron-right"/></svg>Worked with Office 365, RMM (ConnectWise), and project ticketing (Wrike).</li>
+            <li><svg class="icon icon-sm" style="color:var(--accent);flex-shrink:0;margin-top:3px" aria-hidden="true"><use href="#icon-chevron-right"/></svg>Managed cloud storage solutions including AWS, Synology, and Backblaze.</li>
+            <li><svg class="icon icon-sm" style="color:var(--accent);flex-shrink:0;margin-top:3px" aria-hidden="true"><use href="#icon-chevron-right"/></svg>Administered Duo MFA, ESET Endpoint Security, and virtual platforms: Azure, GCP, VMware.</li>
+            <li><svg class="icon icon-sm" style="color:var(--accent);flex-shrink:0;margin-top:3px" aria-hidden="true"><use href="#icon-chevron-right"/></svg>Created GPOs, managed user onboarding/offboarding, and maintained asset and vendor records.</li>
           </ul>
         </div>
       </div>
 
-      <div class="timeline-item">
+      <div class="timeline-item animate-on-scroll">
         <div class="timeline-dot"><div class="timeline-dot-inner" style="background:var(--accent3);box-shadow:0 0 0 3px rgba(56,217,169,0.2),0 0 12px rgba(56,217,169,0.4)"></div></div>
         <div class="exp-card">
           <div class="exp-header">
@@ -944,11 +1209,11 @@
             <div class="exp-period">Aug 2020 — Sep 2021</div>
           </div>
           <div class="exp-role">System Engineer</div>
-          <div class="exp-location">📍 Client-site deployment</div>
+          <div class="exp-location"><svg class="icon icon-sm" aria-hidden="true"><use href="#icon-location"/></svg> Client-site deployment</div>
           <ul class="exp-bullets">
-            <li>Resolved client hardware, software, server, and networking issues end-to-end.</li>
-            <li>Managed Active Directory user policies, compliance reports, and Hyper-V platforms.</li>
-            <li>Installed and configured McAfee Total Security; performed server patching and maintenance.</li>
+            <li><svg class="icon icon-sm" style="color:var(--accent);flex-shrink:0;margin-top:3px" aria-hidden="true"><use href="#icon-chevron-right"/></svg>Resolved client hardware, software, server, and networking issues end-to-end.</li>
+            <li><svg class="icon icon-sm" style="color:var(--accent);flex-shrink:0;margin-top:3px" aria-hidden="true"><use href="#icon-chevron-right"/></svg>Managed Active Directory user policies, compliance reports, and Hyper-V platforms.</li>
+            <li><svg class="icon icon-sm" style="color:var(--accent);flex-shrink:0;margin-top:3px" aria-hidden="true"><use href="#icon-chevron-right"/></svg>Installed and configured McAfee Total Security; performed server patching and maintenance.</li>
           </ul>
         </div>
       </div>
@@ -964,13 +1229,13 @@
     <h2 class="section-title">Technical toolkit</h2>
     <div class="skills-grid">
 
-      <div class="skill-cat">
-        <div class="skill-cat-title"><span>☁️</span> Microsoft 365 & Cloud</div>
+      <div class="skill-cat animate-on-scroll" style="--cat-color: var(--accent)">
+        <div class="skill-cat-title"><svg class="icon" style="color:var(--cat-color)" aria-hidden="true"><use href="#icon-cloud"/></svg> Microsoft 365 &amp; Cloud</div>
         <div class="skill-tags">
-          <span class="skill-tag">Office 365 Admin</span>
-          <span class="skill-tag">Exchange Online</span>
-          <span class="skill-tag">Entra ID</span>
-          <span class="skill-tag">Microsoft Defender</span>
+          <span class="skill-tag skill-tag--core">Office 365 Admin</span>
+          <span class="skill-tag skill-tag--core">Exchange Online</span>
+          <span class="skill-tag skill-tag--core">Entra ID</span>
+          <span class="skill-tag skill-tag--core">Microsoft Defender</span>
           <span class="skill-tag">SharePoint</span>
           <span class="skill-tag">OneDrive</span>
           <span class="skill-tag">Microsoft Teams</span>
@@ -978,45 +1243,45 @@
         </div>
       </div>
 
-      <div class="skill-cat">
-        <div class="skill-cat-title"><span>⚡</span> Automation & Scripting</div>
+      <div class="skill-cat animate-on-scroll" style="--cat-color: var(--accent3)">
+        <div class="skill-cat-title"><svg class="icon" style="color:var(--cat-color)" aria-hidden="true"><use href="#icon-terminal"/></svg> Automation &amp; Scripting</div>
         <div class="skill-tags">
-          <span class="skill-tag">PowerShell</span>
-          <span class="skill-tag">ServiceNow</span>
+          <span class="skill-tag skill-tag--core">PowerShell</span>
+          <span class="skill-tag skill-tag--core">ServiceNow</span>
           <span class="skill-tag">ConnectWise Automate</span>
           <span class="skill-tag">Wrike</span>
           <span class="skill-tag">RMM Tools</span>
         </div>
       </div>
 
-      <div class="skill-cat">
-        <div class="skill-cat-title"><span>🖥️</span> Infrastructure & Virtualization</div>
+      <div class="skill-cat animate-on-scroll" style="--cat-color: var(--accent2)">
+        <div class="skill-cat-title"><svg class="icon" style="color:var(--cat-color)" aria-hidden="true"><use href="#icon-server"/></svg> Infrastructure &amp; Virtualization</div>
         <div class="skill-tags">
-          <span class="skill-tag">Active Directory</span>
-          <span class="skill-tag">Azure</span>
+          <span class="skill-tag skill-tag--core">Active Directory</span>
+          <span class="skill-tag skill-tag--core">Azure</span>
           <span class="skill-tag">GCP</span>
-          <span class="skill-tag">VMware</span>
-          <span class="skill-tag">Hyper-V</span>
+          <span class="skill-tag skill-tag--core">VMware</span>
+          <span class="skill-tag skill-tag--core">Hyper-V</span>
           <span class="skill-tag">Group Policy (GPO)</span>
           <span class="skill-tag">AWS</span>
         </div>
       </div>
 
-      <div class="skill-cat">
-        <div class="skill-cat-title"><span>🌐</span> Networking & Security</div>
+      <div class="skill-cat animate-on-scroll" style="--cat-color: #f97316">
+        <div class="skill-cat-title"><svg class="icon" style="color:var(--cat-color)" aria-hidden="true"><use href="#icon-shield"/></svg> Networking &amp; Security</div>
         <div class="skill-tags">
-          <span class="skill-tag">DNS / DHCP</span>
+          <span class="skill-tag skill-tag--core">DNS / DHCP</span>
           <span class="skill-tag">OSI Model</span>
           <span class="skill-tag">Remote Management</span>
-          <span class="skill-tag">MFA / Duo</span>
+          <span class="skill-tag skill-tag--core">MFA / Duo</span>
           <span class="skill-tag">ESET</span>
           <span class="skill-tag">McAfee</span>
           <span class="skill-tag">BIOS / CMOS</span>
         </div>
       </div>
 
-      <div class="skill-cat">
-        <div class="skill-cat-title"><span>☁️</span> Storage Solutions</div>
+      <div class="skill-cat animate-on-scroll" style="--cat-color: #06b6d4">
+        <div class="skill-cat-title"><svg class="icon" style="color:var(--cat-color)" aria-hidden="true"><use href="#icon-database"/></svg> Storage Solutions</div>
         <div class="skill-tags">
           <span class="skill-tag">AWS S3</span>
           <span class="skill-tag">Synology NAS</span>
@@ -1026,8 +1291,8 @@
         </div>
       </div>
 
-      <div class="skill-cat">
-        <div class="skill-cat-title"><span>🛠️</span> Hardware & Support</div>
+      <div class="skill-cat animate-on-scroll" style="--cat-color: #a3a3a3">
+        <div class="skill-cat-title"><svg class="icon" style="color:var(--cat-color)" aria-hidden="true"><use href="#icon-wrench"/></svg> Hardware &amp; Support</div>
         <div class="skill-tags">
           <span class="skill-tag">PC Assembly</span>
           <span class="skill-tag">Server Patching</span>
@@ -1047,8 +1312,8 @@
     <h2 class="section-title">Credentials & training</h2>
     <div class="certs-grid">
 
-      <div class="cert-card">
-        <div class="cert-icon">🏆</div>
+      <div class="cert-card animate-on-scroll">
+        <div class="cert-icon-wrap"><svg class="icon icon-xl" style="color:var(--accent)" aria-hidden="true"><use href="#icon-award"/></svg></div>
         <div class="cert-body">
           <div class="cert-name">MS-102: Microsoft 365 Administrator</div>
           <div class="cert-org">Microsoft</div>
@@ -1056,8 +1321,8 @@
         </div>
       </div>
 
-      <div class="cert-card">
-        <div class="cert-icon">🖧</div>
+      <div class="cert-card animate-on-scroll">
+        <div class="cert-icon-wrap"><svg class="icon icon-xl" style="color:var(--accent3)" aria-hidden="true"><use href="#icon-network"/></svg></div>
         <div class="cert-body">
           <div class="cert-name">Computer Hardware & Networking</div>
           <div class="cert-org">Avni IT Placement, Dehradun</div>
@@ -1065,8 +1330,8 @@
         </div>
       </div>
 
-      <div class="cert-card">
-        <div class="cert-icon">💻</div>
+      <div class="cert-card animate-on-scroll">
+        <div class="cert-icon-wrap"><svg class="icon icon-xl" style="color:var(--accent2)" aria-hidden="true"><use href="#icon-monitor"/></svg></div>
         <div class="cert-body">
           <div class="cert-name">Computer Fundamentals & Web Development</div>
           <div class="cert-org">Hiltron Calc, Dehradun</div>
@@ -1085,19 +1350,19 @@
     <h2 class="section-title">Academic background</h2>
     <div class="edu-grid">
 
-      <div class="edu-card">
+      <div class="edu-card animate-on-scroll">
         <div class="edu-degree">Bachelor of Commerce</div>
         <div class="edu-school">H.N.B Garhwal University</div>
         <div class="edu-year">2019</div>
       </div>
 
-      <div class="edu-card">
+      <div class="edu-card animate-on-scroll">
         <div class="edu-degree">Intermediate (Commerce)</div>
         <div class="edu-school">C.B.S.E Board</div>
         <div class="edu-year">2014</div>
       </div>
 
-      <div class="edu-card">
+      <div class="edu-card animate-on-scroll">
         <div class="edu-degree">High School</div>
         <div class="edu-school">C.B.S.E Board</div>
         <div class="edu-year">2012</div>
@@ -1118,11 +1383,17 @@
         Whether you have a role, a project, or just want to talk tech — I'd love to hear from you.
       </p>
       <div class="contact-links">
-        <a href="mailto:avinash.kathait56@outlook.com" class="contact-link">
-          ✉️ avinash.kathait56@outlook.com
+        <a href="/cdn-cgi/l/email-protection#771f121b1b183716011e1916041f1c16031f161e03591e19" class="contact-link">
+          <svg class="icon" aria-hidden="true"><use href="#icon-mail"/></svg>
+          <span class="__cf_email__" data-cfemail="d0b8b5bcbcbf90b1a6b9beb1a3b8bbb1a4b8b1b9a4feb9be">[email&#160;protected]</span>
         </a>
         <a href="tel:+917060838476" class="contact-link">
-          📞 +91 70608 38476
+          <svg class="icon" aria-hidden="true"><use href="#icon-phone"/></svg>
+          +91 70608 38476
+        </a>
+        <a href="https://www.linkedin.com/in/avinash-kathait-8ab024216/" class="contact-link" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <svg class="icon" aria-hidden="true"><use href="#icon-linkedin"/></svg>
+          LinkedIn
         </a>
       </div>
     </div>
@@ -1131,8 +1402,56 @@
 
 <!-- FOOTER -->
 <footer>
-  Designed & built for <span>Avinash Kathait</span> · Greater Noida, India · 2025
+  Designed & built by <span>Avinash Kathait</span> · Greater Noida, India · 2025
 </footer>
 
-</body>
-</html>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Hamburger menu toggle
+  const hamburger = document.getElementById('nav-hamburger');
+  const navLinks = document.getElementById('nav-links');
+  const hamburgerIcon = document.getElementById('hamburger-icon');
+
+  hamburger.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('is-open');
+    hamburger.setAttribute('aria-expanded', isOpen);
+    hamburgerIcon.querySelector('use').setAttribute('href', isOpen ? '#icon-close' : '#icon-menu');
+  });
+
+  // Close menu when a nav link is clicked
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('is-open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      hamburgerIcon.querySelector('use').setAttribute('href', '#icon-menu');
+    });
+  });
+
+  // Scroll-spy
+  const sections = document.querySelectorAll('section[id]');
+  const navAnchors = document.querySelectorAll('.nav-links a[href^="#"]');
+
+  const spyObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navAnchors.forEach(a => a.classList.remove('active'));
+        const active = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+
+  sections.forEach(s => spyObserver.observe(s));
+
+  // Animate on scroll
+  const animEls = document.querySelectorAll('.animate-on-scroll');
+  const animObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        animObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  animEls.forEach(el => animObserver.observe(el));
+</script>
