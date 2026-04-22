@@ -891,6 +891,8 @@
   .skills-grid .skill-cat:nth-child(4).is-visible { transition-delay: 0.1s; }
   .skills-grid .skill-cat:nth-child(5).is-visible { transition-delay: 0.2s; }
   .skills-grid .skill-cat:nth-child(6).is-visible { transition-delay: 0.3s; }
+  .skills-grid .skill-cat:nth-child(7).is-visible { transition-delay: 0.1s; }
+  .skills-grid .skill-cat:nth-child(8).is-visible { transition-delay: 0.2s; }
   .certs-grid .cert-card:nth-child(2).is-visible { transition-delay: 0.1s; }
   .certs-grid .cert-card:nth-child(3).is-visible { transition-delay: 0.2s; }
   .edu-grid .edu-card:nth-child(2).is-visible { transition-delay: 0.1s; }
@@ -1039,6 +1041,7 @@
     <li><a href="#about">About</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
     <li><a href="#certs">Certifications</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
@@ -1175,6 +1178,8 @@
           <ul class="exp-bullets">
             <li><svg class="icon icon-sm" style="color:var(--accent);flex-shrink:0;margin-top:3px" aria-hidden="true"><use href="#icon-chevron-right"/></svg>Administered Office 365 via Admin Center, Exchange, Entra ID, Defender, and PowerShell at enterprise scale.</li>
             <li><svg class="icon icon-sm" style="color:var(--accent);flex-shrink:0;margin-top:3px" aria-hidden="true"><use href="#icon-chevron-right"/></svg>Automated workflows across Exchange, Azure, Defender, OneDrive, and SharePoint using PowerShell scripting.</li>
+            <li><svg class="icon icon-sm" style="color:var(--accent);flex-shrink:0;margin-top:3px" aria-hidden="true"><use href="#icon-chevron-right"/></svg>Led and participated in <strong style="color:var(--text)">M365 Tenant-to-Tenant migrations</strong> using BitTitan, Quest, Cloudiway, and ShareGate — covering mailboxes, SharePoint, OneDrive, and Teams data.</li>
+            <li><svg class="icon icon-sm" style="color:var(--accent);flex-shrink:0;margin-top:3px" aria-hidden="true"><use href="#icon-chevron-right"/></svg>Managed enterprise backup and recovery operations using <strong style="color:var(--text)">Rubrik, Druva, and Veeam</strong> — ensuring data protection, RPO/RTO compliance, and recovery testing.</li>
             <li><svg class="icon icon-sm" style="color:var(--accent);flex-shrink:0;margin-top:3px" aria-hidden="true"><use href="#icon-chevron-right"/></svg>Managed PSA ticketing via ServiceNow and RMM via ConnectWise Automate.</li>
             <li><svg class="icon icon-sm" style="color:var(--accent);flex-shrink:0;margin-top:3px" aria-hidden="true"><use href="#icon-chevron-right"/></svg>Handled MFA, P2/P3 escalations, email/call support, and daily operations reporting.</li>
             <li><svg class="icon icon-sm" style="color:var(--accent);flex-shrink:0;margin-top:3px" aria-hidden="true"><use href="#icon-chevron-right"/></svg>Delivered onboarding training and knowledge transfer to new team members globally.</li>
@@ -1301,6 +1306,85 @@
         </div>
       </div>
 
+      <div class="skill-cat animate-on-scroll" style="--cat-color: #f59e0b">
+        <div class="skill-cat-title"><svg class="icon" style="color:var(--cat-color)" aria-hidden="true"><use href="#icon-cloud"/></svg> M365 Tenant Migration</div>
+        <div class="skill-tags">
+          <span class="skill-tag skill-tag--core">BitTitan</span>
+          <span class="skill-tag skill-tag--core">Quest</span>
+          <span class="skill-tag skill-tag--core">Cloudiway</span>
+          <span class="skill-tag skill-tag--core">ShareGate</span>
+          <span class="skill-tag">Mailbox Migration</span>
+          <span class="skill-tag">SharePoint Migration</span>
+          <span class="skill-tag">Teams Migration</span>
+          <span class="skill-tag">OneDrive Migration</span>
+        </div>
+      </div>
+
+      <div class="skill-cat animate-on-scroll" style="--cat-color: #10b981">
+        <div class="skill-cat-title"><svg class="icon" style="color:var(--cat-color)" aria-hidden="true"><use href="#icon-database"/></svg> Backup &amp; Recovery</div>
+        <div class="skill-tags">
+          <span class="skill-tag skill-tag--core">Rubrik</span>
+          <span class="skill-tag skill-tag--core">Druva</span>
+          <span class="skill-tag skill-tag--core">Veeam</span>
+          <span class="skill-tag">RPO / RTO</span>
+          <span class="skill-tag">Data Recovery</span>
+          <span class="skill-tag">Backup Policy</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-inner">
+    <div class="section-label">04 — Projects</div>
+    <h2 class="section-title">Tools I've built</h2>
+    <div class="skills-grid">
+
+      <div class="skill-cat animate-on-scroll" style="--cat-color: var(--accent)">
+        <div class="skill-cat-title">
+          <svg class="icon" style="color:var(--accent)" aria-hidden="true"><use href="#icon-shield"/></svg>
+          SitePulse
+        </div>
+        <p style="font-size:0.85rem;color:var(--text2);line-height:1.7;margin-bottom:1rem">
+          A single-file website security and health testing tool. Performs real HTTP checks, simulated DNS/ping analysis, security header inspection, and SSL validation — with a dark cyberpunk interface.
+        </p>
+        <div class="skill-tags" style="margin-bottom:1rem">
+          <span class="skill-tag">Security Headers</span>
+          <span class="skill-tag">SSL Check</span>
+          <span class="skill-tag">DNS Analysis</span>
+          <span class="skill-tag">HTTP Inspection</span>
+          <span class="skill-tag">Single-file HTML</span>
+        </div>
+        <a href="https://sitepulse.avinashkathait.in" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.4rem;font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--accent);text-decoration:none;border:1px solid rgba(79,142,247,0.3);padding:0.4rem 0.9rem;border-radius:4px;transition:all 0.2s" onmouseover="this.style.background='rgba(79,142,247,0.1)'" onmouseout="this.style.background='transparent'">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="#icon-monitor"/></svg>
+          sitepulse.avinashkathait.in ↗
+        </a>
+      </div>
+
+      <div class="skill-cat animate-on-scroll" style="--cat-color: var(--accent3)">
+        <div class="skill-cat-title">
+          <svg class="icon" style="color:var(--accent3)" aria-hidden="true"><use href="#icon-mail"/></svg>
+          MailGuard
+        </div>
+        <p style="font-size:0.85rem;color:var(--text2);line-height:1.7;margin-bottom:1rem">
+          A domain intelligence and email security analysis tool. Checks SPF, DKIM, DMARC records, MX configuration, and includes a full message header analyser to trace email routing and detect spoofing.
+        </p>
+        <div class="skill-tags" style="margin-bottom:1rem">
+          <span class="skill-tag">SPF / DKIM / DMARC</span>
+          <span class="skill-tag">MX Records</span>
+          <span class="skill-tag">Header Analyser</span>
+          <span class="skill-tag">Domain Intel</span>
+          <span class="skill-tag">Email Security</span>
+        </div>
+        <a href="https://mailguard.avinashkathait.in" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.4rem;font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--accent3);text-decoration:none;border:1px solid rgba(56,217,169,0.3);padding:0.4rem 0.9rem;border-radius:4px;transition:all 0.2s" onmouseover="this.style.background='rgba(56,217,169,0.08)'" onmouseout="this.style.background='transparent'">
+          <svg class="icon icon-sm" aria-hidden="true"><use href="#icon-monitor"/></svg>
+          mailguard.avinashkathait.in ↗
+        </a>
+      </div>
+
     </div>
   </div>
 </section>
@@ -1308,7 +1392,7 @@
 <!-- CERTIFICATIONS -->
 <section id="certs">
   <div class="section-inner">
-    <div class="section-label">04 — Certifications</div>
+    <div class="section-label">05 — Certifications</div>
     <h2 class="section-title">Credentials & training</h2>
     <div class="certs-grid">
 
@@ -1346,7 +1430,7 @@
 <!-- EDUCATION -->
 <section id="education">
   <div class="section-inner">
-    <div class="section-label">05 — Education</div>
+    <div class="section-label">06 — Education</div>
     <h2 class="section-title">Academic background</h2>
     <div class="edu-grid">
 
@@ -1375,7 +1459,7 @@
 <!-- CONTACT -->
 <section id="contact">
   <div class="section-inner">
-    <div class="section-label">06 — Contact</div>
+    <div class="section-label">07 — Contact</div>
     <div class="contact-box">
       <div class="contact-headline">Let's connect</div>
       <p class="contact-sub">
